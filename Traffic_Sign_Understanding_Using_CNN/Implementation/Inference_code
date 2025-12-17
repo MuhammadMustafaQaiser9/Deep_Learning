@@ -1,0 +1,23 @@
+import time
+import torch
+
+
+model.eval()
+
+sample_image, sample_label = val_dataset[0]
+
+
+sample_image = sample_image.unsqueeze(0).to(device);
+
+with torch.no_grad():
+    _ = model(sample_image)
+
+
+with torch.no_grad():
+    start_time = time.time()
+    _ = model(sample_image)
+    end_time = time.time()
+
+inference_time_ms = (end_time - start_time) * 1000
+
+print(f"Inference time for a single image: {inference_time_ms:.2f} ms")
